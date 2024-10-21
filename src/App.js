@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
-import Config from './components/Config';
 import './App.css';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Config from './components/Config';
+import Dashboard from './components/Dashboard';
+import ErrorDialog from "./components/ErrorDialog";
 import {ErrorBoundary} from "react-error-boundary";
 import {PerformanceProvider} from './contexts/PerformanceContext';
+import React, {useState} from 'react';
+import Sidebar from './components/Sidebar';
 import TestErrorHanding from "./test/TestErrorHanding";
-import ErrorDialog from "./components/ErrorDialog";
-import {Fallback} from "./function/Fallback";
 
 function App() {
+    const [resetKey, setResetKey] = React.useState(null)
     const [isSidebarOpen, setSidebarOpen] = useState(true);
 
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
-    return (<ErrorBoundary FallbackComponent={ErrorDialog} fallback={Fallback}>
+    return (<ErrorBoundary
+        FallbackComponent={ErrorDialog}
+        onReset={() => setResetKey(null)}
+        resetKeys={[resetKey]}
+    >
         <PerformanceProvider>
             <Router>
                 <div className="app">

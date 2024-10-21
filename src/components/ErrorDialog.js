@@ -1,6 +1,4 @@
-// src/components/ErrorDialog.js
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton,} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -33,17 +31,12 @@ const ErrorDialog = ({error, resetErrorBoundary}) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={resetErrorBoundary} color="primary">
-                    Try again
+                <Button onClick={resetErrorBoundary} color="primary" type="button">
+                    Try Again
                 </Button>
             </DialogActions>
         </Dialog>
     );
-};
-
-ErrorDialog.propTypes = {
-    error: PropTypes.object,
-    resetErrorBoundary: PropTypes.func.isRequired,
 };
 
 export default ErrorDialog;

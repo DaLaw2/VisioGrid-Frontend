@@ -1,6 +1,6 @@
+import React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import React from 'react';
 
 const ErrorDialog = ({error, resetErrorBoundary}) => {
     return (<Dialog

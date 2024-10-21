@@ -1,7 +1,7 @@
-import {ConfigProvider} from './ConfigContext';
-import {ManagementProvider} from "./ManagementContext";
 import React from 'react';
 import {AgentProvider} from "./AgentContext";
+import {ConfigProvider} from './ConfigContext';
+import {ManagementProvider} from "./ManagementContext";
 
 const AppProviders = ({children}) => {
     return (<ConfigProvider>

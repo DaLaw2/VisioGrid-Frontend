@@ -1,3 +1,5 @@
+import React, {useContext, useState} from 'react';
+import {ClipLoader} from "react-spinners";
 import {
     Box,
     Button,
@@ -12,11 +14,9 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
+import '../styles/Config.css';
 import {ConfigContext} from '../contexts/ConfigContext';
 import InfoDialog from "./InfoDialog";
-import React, {useContext, useState} from 'react';
-import '../styles/Config.css';
-import {ClipLoader} from "react-spinners";
 
 function Config() {
     const [dialogOpen, setDialogOpen] = useState(false);

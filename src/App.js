@@ -1,15 +1,15 @@
+import React, {useState} from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {ErrorBoundary} from "react-error-boundary";
 import './App.css';
 import AppProviders from "./contexts/AppProviders";
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import AgentsList from "./components/AgentList";
+import AgentDashboard from "./components/AgentDashboard";
 import Config from './components/Config';
 import Dashboard from './components/Dashboard';
 import ErrorDialog from "./components/ErrorDialog";
-import {ErrorBoundary} from "react-error-boundary";
-import React, {useState} from 'react';
 import Sidebar from './components/Sidebar';
 import TestErrorHanding from "./test/TestErrorHanding";
-import AgentsList from "./components/AgentList";
-import AgentDashboard from "./components/AgentDashboard";
 
 function App() {
     const [resetKey, setResetKey] = React.useState(null)

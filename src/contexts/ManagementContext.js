@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, {createContext, useEffect, useRef, useState} from 'react';
-import {urls, websocketUrl} from "../AppConfig";
+import axios from 'axios';
 import {useErrorBoundary} from 'react-error-boundary';
+import {urls, websocketUrl} from "../AppConfig";
 
 export const ManagementContext = createContext(null);
 

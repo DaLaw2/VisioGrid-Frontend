@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import {Pie} from 'react-chartjs-2';
-import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
 import {ClipLoader} from 'react-spinners';
-import {AgentContext} from '../contexts/AgentContext';
+import {Pie} from 'react-chartjs-2';
 import {useParams} from 'react-router-dom';
+import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
 import '../styles/Dashboard.css';
+import {AgentContext} from '../contexts/AgentContext';
 
 Chart.register(ArcElement, Title, Tooltip, Legend);
 

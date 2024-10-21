@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
+import {ClipLoader} from 'react-spinners';
 import {Pie} from 'react-chartjs-2';
 import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
-import {ClipLoader} from 'react-spinners';
-import {ManagementContext} from '../contexts/ManagementContext';
 import '../styles/Dashboard.css';
+import {ManagementContext} from '../contexts/ManagementContext';
 
 Chart.register(ArcElement, Title, Tooltip, Legend);
 

@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, {createContext, useEffect, useState} from 'react';
-import {urls} from '../AppConfig';
+import axios from 'axios';
 import {useErrorBoundary} from 'react-error-boundary';
+import {urls} from '../AppConfig';
 
 export const ConfigContext = createContext();
 

@@ -1,6 +1,6 @@
+import React from 'react';
 import {FaBars, FaCogs, FaHome, FaServer} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
-import React from 'react';
 import '../styles/Sidebar.css';
 
 function Sidebar({isOpen, toggleSidebar}) {

@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
-import {AgentContext} from '../contexts/AgentContext';
 import {Link} from 'react-router-dom';
-import {Card, CardActionArea, CardContent, Grid, Typography} from '@mui/material';
 import {Computer, DeveloperBoard, Memory, Settings} from '@mui/icons-material';
+import {Card, CardActionArea, CardContent, Grid, Typography} from '@mui/material';
 import '../styles/AgentsList.css';
+import {AgentContext} from '../contexts/AgentContext';
 
 const AgentsList = () => {
     const {agentList, agentInformationMap} = useContext(AgentContext);

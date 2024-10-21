@@ -3,7 +3,6 @@ import {
     Button,
     Card,
     CardContent,
-    CircularProgress,
     Container,
     FormControl,
     InputLabel,
@@ -16,6 +15,8 @@ import {
 import {ConfigContext} from '../contexts/ConfigContext';
 import InfoDialog from "./InfoDialog";
 import React, {useContext, useState} from 'react';
+import '../styles/Config.css';
+import {ClipLoader} from "react-spinners";
 
 function Config() {
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -56,8 +57,8 @@ function Config() {
     };
 
     if (loading) {
-        return (<div style={{display: 'flex', justifyContent: 'center', marginTop: '20%'}}>
-            <CircularProgress/>
+        return (<div className="loader-container">
+            <ClipLoader color="#3498db" loading={true} size={80}/>
         </div>);
     }
 
@@ -78,6 +79,7 @@ function Config() {
                                 value={config.split_mode}
                                 label="Split Mode"
                                 onChange={handleChange}
+                                className="form-control"
                             >
                                 <MenuItem value="frame">Frame</MenuItem>
                                 <MenuItem value="time">Time</MenuItem>
@@ -93,6 +95,7 @@ function Config() {
                             value={config.segment_duration_secs}
                             onChange={handleChange}
                             inputProps={{min: 1}}
+                            className="form-control"
                         />)}
                         <TextField
                             required
@@ -104,6 +107,7 @@ function Config() {
                             value={config.internal_timestamp}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 60000}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -115,6 +119,7 @@ function Config() {
                             value={config.agent_listen_port}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 65535}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -126,6 +131,7 @@ function Config() {
                             value={config.http_server_bind_port}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 65535}}
+                            className="form-control"
                         />
                         <Box>
                             <Stack direction="row" spacing={2}>
@@ -139,6 +145,7 @@ function Config() {
                                     value={config.dedicated_port_range_start}
                                     onChange={handleChange}
                                     inputProps={{min: 1, max: 65535}}
+                                    className="form-control"
                                 />
                                 <Typography variant="h6" align="center" sx={{mt: 1}}>
                                     ~
@@ -153,6 +160,7 @@ function Config() {
                                     value={config.dedicated_port_range_end}
                                     onChange={handleChange}
                                     inputProps={{min: 1, max: 65535}}
+                                    className="form-control"
                                 />
                             </Stack>
                         </Box>
@@ -166,6 +174,7 @@ function Config() {
                             value={config.refresh_interval}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 3600}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -177,6 +186,7 @@ function Config() {
                             value={config.polling_interval}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 60000}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -188,6 +198,7 @@ function Config() {
                             value={config.bind_retry_duration}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 3600}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -199,6 +210,7 @@ function Config() {
                             value={config.agent_idle_duration}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 3600}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -210,6 +222,7 @@ function Config() {
                             value={config.control_channel_timeout}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 3600}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -221,6 +234,7 @@ function Config() {
                             value={config.data_channel_timeout}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 3600}}
+                            className="form-control"
                         />
                         <TextField
                             required
@@ -232,6 +246,7 @@ function Config() {
                             value={config.file_transfer_timeout}
                             onChange={handleChange}
                             inputProps={{min: 1, max: 3600}}
+                            className="form-control"
                         />
                     </Stack>
                 </CardContent>

@@ -1,35 +1,56 @@
-import React, { useContext } from 'react';
-import { AgentContext } from '../contexts/AgentContext';
-import { Link } from 'react-router-dom';
+import React, {useContext} from 'react';
+import {AgentContext} from '../contexts/AgentContext';
+import {Link} from 'react-router-dom';
+import {Card, CardActionArea, CardContent, Grid, Typography} from '@mui/material';
+import {Computer, DeveloperBoard, Memory, Settings} from '@mui/icons-material';
 import '../styles/AgentsList.css';
 
 const AgentsList = () => {
-    const { agentList, agentInformationMap } = useContext(AgentContext);
+    const {agentList, agentInformationMap} = useContext(AgentContext);
 
     if (agentList.length === 0) {
-        return <div className="loading">Loading agents...</div>;
+        return (<Typography variant="h4" align="center" gutterBottom>
+            No Agent Found
+        </Typography>);
     }
 
-    return (
-        <div className="agents-list">
-            <h1>Agents</h1>
-            <ul>
-                {agentList.map((uuid) => {
-                    const info = agentInformationMap[uuid] || {};
-                    return (
-                        <li key={uuid} className="agent-item">
-                            <Link to={`/agent/${uuid}`} className="agent-link">
-                                <h2>{info.host_name || 'Unknown Host'}</h2>
-                                <p><strong>UUID:</strong> {uuid}</p>
-                                <p><strong>OS:</strong> {info.os_name || 'Unknown OS'}</p>
-                                <p><strong>CPU:</strong> {info.cpu || 'Unknown CPU'}</p>
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
-    );
+    return (<div className="agents-list">
+        <Typography variant="h4" align="center" gutterBottom>
+            Agent List
+        </Typography>
+        <Grid container spacing={3}>
+            {agentList.map((uuid) => {
+                const info = agentInformationMap[uuid] || {};
+                return (<Grid item xs={12} sm={6} md={4} key={uuid}>
+                    <Card>
+                        <CardActionArea component={Link} to={`/agent/${uuid}`}>
+                            <CardContent>
+                                <Typography variant="h6" component="div">
+                                    {info.host_name}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    <Settings fontSize="small" style={{verticalAlign: 'middle'}}/>{' '}
+                                    <strong>UUID：</strong> {uuid}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    <Computer fontSize="small" style={{verticalAlign: 'middle'}}/>{' '}
+                                    <strong>OS：</strong> {info.os_name}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    <Memory fontSize="small" style={{verticalAlign: 'middle'}}/>{' '}
+                                    <strong>CPU：</strong> {info.cpu}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    <DeveloperBoard fontSize="small" style={{verticalAlign: 'middle'}}/>{' '}
+                                    <strong>GPU：</strong> {info.gpu}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>);
+            })}
+        </Grid>
+    </div>);
 };
 
 export default AgentsList;

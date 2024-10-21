@@ -1,7 +1,7 @@
-import React from 'react';
+import {FaBars, FaCogs, FaHome, FaServer} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
-import {FaBars, FaCogs, FaHome} from 'react-icons/fa';
-import './Sidebar.css';
+import React from 'react';
+import '../styles/Sidebar.css';
 
 function Sidebar({isOpen, toggleSidebar}) {
     return (<div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
@@ -16,6 +16,12 @@ function Sidebar({isOpen, toggleSidebar}) {
                 <NavLink to="/" className="menu-item">
                     <FaHome className="menu-icon"/>
                     {isOpen && <span>Home</span>}
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/agents" className="menu-item">
+                    <FaServer className="menu-icon"/>
+                    {isOpen && <span>Agents</span>}
                 </NavLink>
             </li>
             <li>

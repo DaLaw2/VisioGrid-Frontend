@@ -26,8 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "run": "react-scripts start",
-    "run build": "serve -s build",
+    "run dev": "react-scripts start",
+    "run release": "react-scripts build && serve -s build",
     "build": "react-scripts build"
   },
   "eslintConfig": {

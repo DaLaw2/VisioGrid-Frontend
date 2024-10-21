@@ -2,15 +2,20 @@ import React, {useContext} from 'react';
 import {Pie} from 'react-chartjs-2';
 import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
 import {ClipLoader} from 'react-spinners';
-import {ManagementContext} from '../contexts/ManagementContext';
+import {AgentContext} from '../contexts/AgentContext';
+import {useParams} from 'react-router-dom';
 import '../styles/Dashboard.css';
 
 Chart.register(ArcElement, Title, Tooltip, Legend);
 
-function Dashboard() {
-    const {performanceInfo, systemInfo, loading} = useContext(ManagementContext);
+function AgentDashboard() {
+    const {uuid} = useParams();
+    const {agentPerformanceMap, agentInformationMap} = useContext(AgentContext);
 
-    if (loading || !systemInfo || !performanceInfo) {
+    const performanceInfo = agentPerformanceMap[uuid];
+    const systemInfo = agentInformationMap[uuid];
+
+    if (!systemInfo || !performanceInfo) {
         return (<div className="loader-container">
             <ClipLoader color="#3498db" loading={true} size={80}/>
         </div>);
@@ -55,7 +60,7 @@ function Dashboard() {
     const vramData = getPieData(vramInGB, totalVramInGB, 'VRAM (GB)');
 
     return (<div className="dashboard">
-        <h1 className="system-info-h1">Management Information</h1>
+        <h1 className="system-info-h1">Agent Information</h1>
         <div className="system-info">
             <ul>
                 <li><strong>Host:</strong> {systemInfo.host_name}</li>
@@ -66,7 +71,7 @@ function Dashboard() {
                 <li><strong>VRAM:</strong> {totalVramInGB} GB</li>
             </ul>
         </div>
-        <h1>Management Load</h1>
+        <h1>Agent Load</h1>
         <div className="chart-container">
             <div className="chart">
                 <h2>CPU Usage</h2>
@@ -88,4 +93,4 @@ function Dashboard() {
     </div>);
 }
 
-export default Dashboard;
+export default AgentDashboard;

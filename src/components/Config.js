@@ -1,3 +1,4 @@
+import {urls} from "../core/AppConfig";
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {
@@ -16,7 +17,7 @@ import {
     Typography,
 } from '@mui/material';
 
-const Config = () => {
+function Config() {
     const [config, setConfig] = useState({
         split_mode: 'frame',
         segment_duration_secs: '',
@@ -39,7 +40,7 @@ const Config = () => {
     useEffect(() => {
         const loadCurrentConfig = async () => {
             try {
-                let response = await axios.get('http://localhost:8080/config/get');
+                let response = await axios.get(urls.getConfig);
                 if (response.status === 200) {
                     let fetchedConfig = response.data;
                     setConfig({
@@ -82,15 +83,12 @@ const Config = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const preparedConfig = {
-            split_mode:
-                config.split_mode === 'time'
-                    ? {
-                        mode: 'time',
-                        segment_duration_secs: parseInt(config.segment_duration_secs),
-                    }
-                    : {
-                        mode: 'frame',
-                    },
+            split_mode: config.split_mode === 'time' ? {
+                mode: 'time',
+                segment_duration_secs: parseInt(config.segment_duration_secs)
+            } : {
+                mode: 'frame'
+            },
             internal_timestamp: parseInt(config.internal_timestamp),
             agent_listen_port: parseInt(config.agent_listen_port),
             http_server_bind_port: parseInt(config.http_server_bind_port),
@@ -108,13 +106,13 @@ const Config = () => {
         };
 
         try {
-            let response = await axios.post('http://localhost:8080/config/update', preparedConfig);
+            let response = await axios.post(urls.updateConfig, preparedConfig);
             if (response.status === 200) {
                 alert('Config updated successfully.');
                 setLoading(true);
                 const loadCurrentConfig = async () => {
                     try {
-                        let response = await axios.get('http://localhost:8080/config/get');
+                        let response = await axios.get(urls.getConfig);
                         if (response.status === 200) {
                             let fetchedConfig = response.data;
                             setConfig({
@@ -164,7 +162,7 @@ const Config = () => {
     return (
         <Container maxWidth="md" sx={{mt: 4, mb: 4}}>
             <Typography variant="h4" align="center" gutterBottom>
-                Configuration Settings
+                Configuration
             </Typography>
             <form onSubmit={handleSubmit}>
                 <Card variant="outlined" sx={{padding: 3, mb: 3}}>
@@ -366,6 +364,6 @@ const Config = () => {
             </Typography>
         </Container>
     );
-};
+}
 
 export default Config;

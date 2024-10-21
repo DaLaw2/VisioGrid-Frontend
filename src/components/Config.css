@@ -1,25 +1,20 @@
-/* src/components/Config.css */
 
-/* 配置页面的样式 */
 .config-page {
     background-color: #f9f9f9;
     min-height: 100vh;
     padding-top: 30px;
 }
 
-/* 居中表单 */
 .config-page .container {
     max-width: 800px;
 }
 
-/* 表单标题 */
 .config-page h2 {
     text-align: center;
     margin-bottom: 40px;
     color: #2c3e50;
 }
 
-/* 表单组样式 */
 .config-page .form-group label {
     font-weight: bold;
     color: #34495e;
@@ -29,7 +24,6 @@
     border-radius: 5px;
 }
 
-/* 提交按钮 */
 .config-page .btn-primary {
     background-color: #3498db;
     border-color: #3498db;
@@ -44,7 +38,6 @@
     border-color: #2980b9;
 }
 
-/* 加载动画 */
 .loader-container {
     display: flex;
     justify-content: center;

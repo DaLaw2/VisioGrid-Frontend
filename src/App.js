@@ -1,19 +1,22 @@
-// src/App.js
 import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import Config from './components/Config';
 import './App.css';
-import {WebSocketProvider} from './contexts/WebSocketContext';
+import {ErrorBoundary} from "react-error-boundary";
+import {PerformanceProvider} from './contexts/PerformanceContext';
+import TestErrorHanding from "./test/TestErrorHanding";
+import ErrorDialog from "./components/ErrorDialog";
+import {Fallback} from "./function/Fallback";
 
 function App() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
 
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
-    return (
-        <WebSocketProvider>
+    return (<ErrorBoundary FallbackComponent={ErrorDialog} fallback={Fallback}>
+        <PerformanceProvider>
             <Router>
                 <div className="app">
                     <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
@@ -21,12 +24,13 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Dashboard/>}/>
                             <Route path="/config" element={<Config/>}/>
+                            <Route path="error" element={<TestErrorHanding/>}/>
                         </Routes>
                     </div>
                 </div>
             </Router>
-        </WebSocketProvider>
-    );
+        </PerformanceProvider>
+    </ErrorBoundary>);
 }
 
 export default App;

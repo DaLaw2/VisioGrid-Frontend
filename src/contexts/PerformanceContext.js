@@ -1,22 +1,19 @@
+import {websocketUrl} from "../core/AppConfig";
 import React, {createContext, useEffect, useRef, useState} from 'react';
 
-export const WebSocketContext = createContext(null);
+export const PerformanceContext = createContext(null);
 
-export const WebSocketProvider = ({children}) => {
-    const [performanceInfo, setPerformanceInfo] = useState(null);
+export const PerformanceProvider = ({children}) => {
     const ws = useRef(null);
     const hasConnected = useRef(false);
+    const [performanceInfo, setPerformanceInfo] = useState(null);
 
     useEffect(() => {
         if (hasConnected.current)
             return;
         hasConnected.current = true;
 
-        ws.current = new WebSocket('ws://127.0.0.1:8080/monitor/websocket/performance/system');
-
-        ws.current.onopen = () => {
-            console.log('WebSocket connection established');
-        };
+        ws.current = new WebSocket(websocketUrl.systemPerformance);
 
         ws.current.onmessage = (event) => {
             try {
@@ -43,8 +40,8 @@ export const WebSocketProvider = ({children}) => {
     }, []);
 
     return (
-        <WebSocketContext.Provider value={{performanceInfo}}>
+        <PerformanceContext.Provider value={{performanceInfo}}>
             {children}
-        </WebSocketContext.Provider>
+        </PerformanceContext.Provider>
     );
 };

@@ -2,20 +2,20 @@ import React, {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import {Pie} from 'react-chartjs-2';
 import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
-import {WebSocketContext} from '../contexts/WebSocketContext';
+import {PerformanceContext} from '../contexts/PerformanceContext';
 import './Dashboard.css';
 import {ClipLoader} from 'react-spinners';
 
 Chart.register(ArcElement, Title, Tooltip, Legend);
 
-const Dashboard = () => {
+function Dashboard() {
+    const {performanceInfo} = useContext(PerformanceContext);
     const [systemInfo, setSystemInfo] = useState(null);
-    const {performanceInfo} = useContext(WebSocketContext);
     const [loading, setLoading] = useState(true);
 
     const fetchSystemInformation = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8080/monitor/get/information/system');
+            const response = await axios.get('http://140.130.34.68:8080/monitor/get/information/system');
             setSystemInfo(response.data);
             setLoading(false);
         } catch (error) {
@@ -30,8 +30,8 @@ const Dashboard = () => {
 
     if (loading || !systemInfo || !performanceInfo) {
         return (<div className="loader-container">
-                <ClipLoader color="#3498db" loading={true} size={80}/>
-            </div>);
+            <ClipLoader color="#3498db" loading={true} size={80}/>
+        </div>);
     }
 
     const getPieData = (used, total, resourceName, isPercentage = false) => ({
@@ -132,6 +132,6 @@ const Dashboard = () => {
             </div>
         </div>
     </div>);
-};
+}
 
 export default Dashboard;

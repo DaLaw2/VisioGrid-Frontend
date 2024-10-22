@@ -8,7 +8,7 @@ import {ManagementContext} from '../contexts/ManagementContext';
 Chart.register(ArcElement, Title, Tooltip, Legend);
 
 function Dashboard() {
-    const {performanceInfo, systemInfo, loading} = useContext(ManagementContext);
+    const {systemInfo, performanceInfo, loading} = useContext(ManagementContext);
 
     if (loading || !systemInfo || !performanceInfo) {
         return (<div className="loader-container">

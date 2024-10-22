@@ -21,7 +21,7 @@ import InfoDialog from "./InfoDialog";
 function Config() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState('');
-    const {config, setConfig, loading, updateConfig} = useContext(ConfigContext);
+    const {config, setConfig, updateConfig, loading} = useContext(ConfigContext);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -50,7 +50,6 @@ function Config() {
             data_channel_timeout: parseInt(config.data_channel_timeout),
             file_transfer_timeout: parseInt(config.file_transfer_timeout),
         };
-
         await updateConfig(preparedConfig);
         setDialogMessage("Configuration update successful.");
         setDialogOpen(true);

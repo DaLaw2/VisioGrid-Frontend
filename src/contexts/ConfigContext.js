@@ -9,7 +9,7 @@ export const ConfigProvider = ({children}) => {
     const {showBoundary} = useErrorBoundary();
     const [loading, setLoading] = useState(true);
     const [config, setConfig] = useState({
-        split_mode: 'frame',
+        split_mode: 'time',
         segment_duration_secs: '',
         internal_timestamp: '',
         agent_listen_port: '',
@@ -57,15 +57,10 @@ export const ConfigProvider = ({children}) => {
         }
     };
 
-    useEffect(() => {
-        loadCurrentConfig();
-    }, []);
-
     const updateConfig = async (preparedConfig) => {
         try {
             let response = await axios.post(urls.updateConfig, preparedConfig);
             if (response.status === 200) {
-                setLoading(true);
                 await loadCurrentConfig();
             } else {
                 showBoundary(new Error('Failed to update config: ' + response.data));
@@ -75,7 +70,11 @@ export const ConfigProvider = ({children}) => {
         }
     };
 
-    return (<ConfigContext.Provider value={{config, setConfig, loading, updateConfig}}>
+    useEffect(() => {
+        loadCurrentConfig();
+    }, []);
+
+    return (<ConfigContext.Provider value={{config, setConfig, updateConfig, loading}}>
         {children}
     </ConfigContext.Provider>);
 };

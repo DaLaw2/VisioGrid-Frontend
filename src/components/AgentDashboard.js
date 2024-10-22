@@ -10,10 +10,10 @@ Chart.register(ArcElement, Title, Tooltip, Legend);
 
 function AgentDashboard() {
     const {uuid} = useParams();
-    const {agentPerformanceMap, agentInformationMap} = useContext(AgentContext);
+    const {agentPerformance, agentInformation} = useContext(AgentContext);
 
-    const performanceInfo = agentPerformanceMap[uuid];
-    const systemInfo = agentInformationMap[uuid];
+    const performanceInfo = agentPerformance[uuid];
+    const systemInfo = agentInformation[uuid];
 
     if (!systemInfo || !performanceInfo) {
         return (<div className="loader-container">

@@ -27,7 +27,12 @@ export const ManagementProvider = ({children}) => {
     };
 
     useEffect(() => {
-        if (hasConnected.current) return;
+        fetchSystemInformation();
+    }, []);
+
+    useEffect(() => {
+        if (hasConnected.current) 
+            return;
         hasConnected.current = true;
 
         ws.current = new WebSocket(websocketUrl.systemPerformance);
@@ -37,30 +42,16 @@ export const ManagementProvider = ({children}) => {
                 const data = JSON.parse(event.data);
                 setPerformanceInfo(data);
             } catch (error) {
-                showBoundary(new Error("Error while websocket connection"));
+                showBoundary(new Error(`Error while websocket connection: ${error}`));
             }
         };
 
         ws.current.onerror = (error) => {
             showBoundary(new Error(`Error while websocket connection: ${error}`));
         };
-
-        ws.current.onclose = () => {
-            showBoundary(new Error("You are offline"));
-        };
-
-        return () => {
-            if (ws.current.readyState === WebSocket.OPEN) {
-                ws.current.close();
-            }
-        };
     }, []);
 
-    useEffect(() => {
-        fetchSystemInformation();
-    }, []);
-
-    return (<ManagementContext.Provider value={{performanceInfo, systemInfo, loading}}>
+    return (<ManagementContext.Provider value={{systemInfo, performanceInfo, loading}}>
         {children}
     </ManagementContext.Provider>);
 };

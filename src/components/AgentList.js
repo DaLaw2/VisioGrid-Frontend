@@ -6,7 +6,7 @@ import '../styles/AgentsList.css';
 import {AgentContext} from '../contexts/AgentContext';
 
 const AgentsList = () => {
-    const {agentList, agentInformationMap} = useContext(AgentContext);
+    const {agentList, agentInformationMap: agentInformation} = useContext(AgentContext);
 
     if (agentList.length === 0) {
         return (<Typography variant="h4" align="center" gutterBottom>
@@ -20,7 +20,7 @@ const AgentsList = () => {
         </Typography>
         <Grid container spacing={3}>
             {agentList.map((uuid) => {
-                const info = agentInformationMap[uuid] || {};
+                const info = agentInformation[uuid] || {};
                 return (<Grid item xs={12} sm={6} md={4} key={uuid}>
                     <Card>
                         <CardActionArea component={Link} to={`/agent/${uuid}`}>

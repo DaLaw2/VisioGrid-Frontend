@@ -6,7 +6,7 @@ import '../styles/AgentsList.css';
 import {AgentContext} from '../contexts/AgentContext';
 
 const AgentsList = () => {
-    const {agentList, agentInformationMap: agentInformation} = useContext(AgentContext);
+    const {agentList, agentInformation} = useContext(AgentContext);
 
     if (agentList.length === 0) {
         return (<Typography variant="h4" align="center" gutterBottom>

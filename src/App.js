@@ -12,16 +12,11 @@ import Sidebar from './components/Sidebar';
 import TestErrorHanding from "./test/TestErrorHanding";
 
 function App() {
-    const [resetKey, setResetKey] = React.useState(null)
     const [isSidebarOpen, setSidebarOpen] = useState(true);
 
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
-    return (<ErrorBoundary
-        FallbackComponent={ErrorDialog}
-        onReset={() => setResetKey(null)}
-        resetKeys={[resetKey]}
-    >
+    return (<ErrorBoundary FallbackComponent={ErrorDialog}>
         <AppProviders>
             <Router>
                 <div className="app">

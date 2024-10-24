@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useErrorBoundary} from 'react-error-boundary';
 import {urls} from '../AppConfig';
 
-export const ConfigContext = createContext();
+export const ConfigContext = createContext(null);
 
 export const ConfigProvider = ({children}) => {
     const {showBoundary} = useErrorBoundary();

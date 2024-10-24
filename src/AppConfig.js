@@ -10,10 +10,10 @@ export const urls = {
     agentInformation: (uuid) => `${httpProtocol}://${hostname}:${port}/monitor/get/information/${uuid}`,
     systemPerformance: `${httpProtocol}://${hostname}:${port}/monitor/get/performance/system`,
     agentPerformance: (uuid) => `${httpProtocol}://${hostname}:${port}/monitor/get/performance/${uuid}`,
-    systemLog: `${httpProtocol}://${hostname}:${port}/log/get/system_log`,
-    systemLogSince: (since) => `${httpProtocol}://${hostname}:${port}/log/get/system_log/since/${since}`,
-    agentLog: (uuid) => `${httpProtocol}://${hostname}:${port}/log/get/${uuid}}`,
-    agentLogSince: (uuid, since) => `${httpProtocol}://${hostname}:${port}/log/get/${uuid}/since/${since}`,
+    systemLog: `${httpProtocol}://${hostname}:${port}/log/system_log`,
+    systemLogSince: (since) => `${httpProtocol}://${hostname}:${port}/log/system_log/since/${since}`,
+    agentLog: (uuid) => `${httpProtocol}://${hostname}:${port}/log/${uuid}`,
+    agentLogSince: (uuid, since) => `${httpProtocol}://${hostname}:${port}/log/${uuid}/since/${since}`,
 }
 
 export const websocketUrl = {
@@ -22,3 +22,4 @@ export const websocketUrl = {
 }
 
 export const AGENT_LIST_REFRESH_INTERVAL = 10000;
+export const LOG_REFRESH_INTERVAL = 10000;

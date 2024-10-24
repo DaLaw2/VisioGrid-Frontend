@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import {urls, LOG_REFRESH_INTERVAL} from '../AppConfig';
 import {useErrorBoundary} from 'react-error-boundary';
+import {urls, LOG_REFRESH_INTERVAL} from '../AppConfig';
 
 export const ManagementLogContext = createContext(null);
 
@@ -34,7 +34,7 @@ export const ManagementLogProvider = ({children}) => {
 
     const fetchUpdatedSystemLogs = async () => {
         try {
-            const since = formatDate(lastUpdate);
+            const since = lastUpdate.toISOString();
             const response = await axios.get(urls.systemLogSince(since));
             if (response.data && response.data.length > 0) {
                 setSystemLogs(prevLogs => [...prevLogs, ...response.data]);

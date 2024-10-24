@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import {urls, LOG_REFRESH_INTERVAL} from '../AppConfig';
 import {useErrorBoundary} from 'react-error-boundary';
+import {LOG_REFRESH_INTERVAL, urls} from '../AppConfig';
 
 export const AgentLogContext = createContext(null);
 
@@ -10,14 +10,6 @@ export const AgentLogProvider = ({children}) => {
     const [agentLogs, setAgentLogs] = useState({});
     const [loading, setLoading] = useState(true);
     const [lastUpdate, setLastUpdate] = useState(new Date());
-
-    function formatDate(date) {
-        function pad(number) {
-            return number < 10 ? '0' + number : number;
-        }
-
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}-${pad(date.getHours())}-${pad(date.getMinutes())}-${pad(date.getSeconds())}`;
-    }
 
     const fetchAgentList = async () => {
         try {
@@ -55,7 +47,7 @@ export const AgentLogProvider = ({children}) => {
 
     const fetchUpdatedAgentLogs = async () => {
         try {
-            const since = formatDate(lastUpdate);
+            const since = lastUpdate.toISOString();
             const agentList = await fetchAgentList();
 
             const logPromises = agentList.map(async (uuid) => {

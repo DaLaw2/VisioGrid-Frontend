@@ -8,6 +8,7 @@ import AgentDashboard from "./components/AgentDashboard";
 import Config from './components/Config';
 import Dashboard from './components/Dashboard';
 import ErrorDialog from "./components/ErrorDialog";
+import InferenceForm from "./components/InferenceForm";
 import Sidebar from './components/Sidebar';
 import TestErrorHanding from "./test/TestErrorHanding";
 
@@ -27,6 +28,7 @@ function App() {
                             <Route path="/config" element={<Config/>}/>
                             <Route path="/agents" element={<AgentsList />} />
                             <Route path="/agent/:uuid" element={<AgentDashboard />} />
+                            <Route path="/inference" element={<InferenceForm />} />
                             <Route path="error" element={<TestErrorHanding/>}/>
                         </Routes>
                     </div>

@@ -1,6 +1,6 @@
 let httpProtocol = "http";
 let websocketProtocol = "ws";
-const hostname = "140.130.34.68"
+const hostname = "127.0.0.1"
 const port = 8080
 export const urls = {
     getConfig: `${httpProtocol}://${hostname}:${port}/config/get`,
@@ -14,6 +14,7 @@ export const urls = {
     systemLogSince: (since) => `${httpProtocol}://${hostname}:${port}/log/system_log/since/${since}`,
     agentLog: (uuid) => `${httpProtocol}://${hostname}:${port}/log/${uuid}`,
     agentLogSince: (uuid, since) => `${httpProtocol}://${hostname}:${port}/log/${uuid}/since/${since}`,
+    inferenceRequest: `${httpProtocol}://${hostname}:${port}/inference/request`
 }
 
 export const websocketUrl = {

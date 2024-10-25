@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
 import '../styles/Dashboard.css';
 import {AgentContext} from '../contexts/AgentContext';
+import LogComponent from "./LogComponent";
 
 Chart.register(ArcElement, Title, Tooltip, Legend);
 
@@ -59,6 +60,11 @@ function AgentDashboard() {
     const ramData = getPieData(ramInGB, totalRamInGB, 'RAM (GB)');
     const vramData = getPieData(vramInGB, totalVramInGB, 'VRAM (GB)');
 
+    const renderAgentLogItem = (log) => (<>
+        <span className="log-timestamp">{log.timestamp}:</span>
+        <span className="log-message">{log.message}</span>
+    </>);
+
     return (<div className="dashboard">
         <h1 className="system-info-h1">Agent Information</h1>
         <div className="system-info">
@@ -90,6 +96,8 @@ function AgentDashboard() {
                 <Pie data={vramData} options={pieChartOptions}/>
             </div>
         </div>
+        <h1>Management Log</h1>
+        <LogComponent logType="agent" identifier={uuid}/>
     </div>);
 }
 

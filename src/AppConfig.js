@@ -21,5 +21,5 @@ export const websocketUrl = {
     agentPerformance: (uuid) => `${websocketProtocol}://${hostname}:${port}/monitor/websocket/performance/${uuid}`,
 }
 
-export const AGENT_LIST_REFRESH_INTERVAL = 10000;
-export const LOG_REFRESH_INTERVAL = 10000;
+export const AGENT_LIST_REFRESH_INTERVAL = 60000;
+export const LOG_REFRESH_INTERVAL = 60000;

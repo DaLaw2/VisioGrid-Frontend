@@ -4,6 +4,7 @@ import {Pie} from 'react-chartjs-2';
 import {ArcElement, Chart, Legend, Title, Tooltip} from 'chart.js';
 import '../styles/Dashboard.css';
 import {ManagementContext} from '../contexts/ManagementContext';
+import LogComponent from "./LogComponent";
 
 Chart.register(ArcElement, Title, Tooltip, Legend);
 
@@ -85,6 +86,8 @@ function Dashboard() {
                 <Pie data={vramData} options={pieChartOptions}/>
             </div>
         </div>
+        <h1>Management Log</h1>
+        <LogComponent logType="system"/>
     </div>);
 }
 

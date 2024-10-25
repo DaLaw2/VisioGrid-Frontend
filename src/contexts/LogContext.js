@@ -1,30 +1,46 @@
 import React, {createContext, useEffect, useState} from 'react';
 import axios from 'axios';
+import {urls, LOG_REFRESH_INTERVAL} from '../AppConfig';
 import {useErrorBoundary} from 'react-error-boundary';
-import {LOG_REFRESH_INTERVAL, urls} from '../AppConfig';
 
-export const AgentLogContext = createContext(null);
+export const LogContext = createContext();
 
-export const AgentLogProvider = ({children}) => {
+export const LogProvider = ({children}) => {
     const {showBoundary} = useErrorBoundary();
+
+    const [systemLogs, setSystemLogs] = useState([]);
     const [agentLogs, setAgentLogs] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState({agent: true, system: true});
     const [lastUpdate, setLastUpdate] = useState(new Date());
+
+    const fetchInitialSystemLogs = async () => {
+        setLoading(prev => ({...prev, system: true}));
+        try {
+            const response = await axios.get(urls.systemLog);
+            setSystemLogs(response.data);
+            setLastUpdate(new Date());
+        } catch (err) {
+            showBoundary(new Error("Error while fetch system log"));
+        } finally {
+            setLoading(prev => ({...prev, system: false}));
+        }
+    };
 
     const fetchAgentList = async () => {
         try {
             const response = await axios.get(urls.agentList);
             return response.data;
         } catch (err) {
-            showBoundary(new Error("获取代理列表时出错"));
+            showBoundary(new Error("Error while fetch agent list"));
             return [];
         }
     };
 
     const fetchInitialAgentLogs = async () => {
-        setLoading(true);
+        setLoading(prev => ({...prev, agent: true}));
         try {
             const agentList = await fetchAgentList();
+
             const logPromises = agentList.map(async (uuid) => {
                 const response = await axios.get(urls.agentLog(uuid));
                 return {uuid, logs: response.data};
@@ -39,9 +55,22 @@ export const AgentLogProvider = ({children}) => {
             setAgentLogs(logsMap);
             setLastUpdate(new Date());
         } catch (err) {
-            showBoundary(new Error("获取代理日志时出错"));
+            showBoundary(new Error("Error while fetch agent log"));
         } finally {
-            setLoading(false);
+            setLoading(prev => ({...prev, agent: false}));
+        }
+    };
+
+    const fetchUpdatedSystemLogs = async () => {
+        try {
+            const since = lastUpdate.toISOString();
+            const response = await axios.get(urls.systemLogSince(since));
+            if (response.data && response.data.length > 0) {
+                setSystemLogs(prevLogs => [...prevLogs, ...response.data]);
+                setLastUpdate(new Date());
+            }
+        } catch (err) {
+            showBoundary(new Error("Error while update system log"));
         }
     };
 
@@ -68,23 +97,29 @@ export const AgentLogProvider = ({children}) => {
 
             setLastUpdate(new Date());
         } catch (err) {
-            showBoundary(new Error("更新代理日志时出错"));
+            showBoundary(new Error("Error while update agent log"));
         }
     };
 
     useEffect(() => {
+        fetchInitialSystemLogs();
         fetchInitialAgentLogs();
 
         const interval = setInterval(() => {
             fetchUpdatedAgentLogs();
+            fetchUpdatedSystemLogs();
         }, LOG_REFRESH_INTERVAL);
 
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <AgentLogContext.Provider value={{agentLogs, loading}}>
+        <LogContext.Provider value={{
+            agentLogs,
+            systemLogs,
+            loading,
+        }}>
             {children}
-        </AgentLogContext.Provider>
+        </LogContext.Provider>
     );
 };

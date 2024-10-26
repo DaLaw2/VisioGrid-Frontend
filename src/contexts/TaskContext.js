@@ -33,7 +33,7 @@ export const TaskProvider = ({children}) => {
 
     useEffect(() => {
         fetchTasks();
-        const interval = setInterval(fetchTasks, 5000); // 每5秒刷新一次
+        const interval = setInterval(fetchTasks, 10000); // 每5秒刷新一次
         return () => clearInterval(interval);
     }, []);
 

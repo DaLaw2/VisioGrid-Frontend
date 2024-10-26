@@ -2,25 +2,29 @@ let httpProtocol = "http";
 let websocketProtocol = "ws";
 const hostname = "127.0.0.1"
 const port = 8080
+const host = `${hostname}:${port}`
+// const host = window.location.host;
 export const urls = {
-    getConfig: `${httpProtocol}://${hostname}:${port}/config/get`,
-    updateConfig: `${httpProtocol}://${hostname}:${port}/config/update`,
-    agentList: `${httpProtocol}://${hostname}:${port}/monitor/get/agent_list`,
-    systemInformation: `${httpProtocol}://${hostname}:${port}/monitor/get/information/system`,
-    agentInformation: (uuid) => `${httpProtocol}://${hostname}:${port}/monitor/get/information/${uuid}`,
-    systemPerformance: `${httpProtocol}://${hostname}:${port}/monitor/get/performance/system`,
-    agentPerformance: (uuid) => `${httpProtocol}://${hostname}:${port}/monitor/get/performance/${uuid}`,
-    systemLog: `${httpProtocol}://${hostname}:${port}/log/system_log`,
-    systemLogSince: (since) => `${httpProtocol}://${hostname}:${port}/log/system_log/since/${since}`,
-    agentLog: (uuid) => `${httpProtocol}://${hostname}:${port}/log/${uuid}`,
-    agentLogSince: (uuid, since) => `${httpProtocol}://${hostname}:${port}/log/${uuid}/since/${since}`,
-    inferenceRequest: `${httpProtocol}://${hostname}:${port}/inference/request`
+    getConfig: `${httpProtocol}://${host}/config/get`,
+    updateConfig: `${httpProtocol}://${host}/config/update`,
+    agentList: `${httpProtocol}://${host}/monitor/get/agent_list`,
+    systemInformation: `${httpProtocol}://${host}/monitor/get/information/system`,
+    agentInformation: (uuid) => `${httpProtocol}://${host}/monitor/get/information/${uuid}`,
+    systemPerformance: `${httpProtocol}://${host}/monitor/get/performance/system`,
+    agentPerformance: (uuid) => `${httpProtocol}://${host}/monitor/get/performance/${uuid}`,
+    systemLog: `${httpProtocol}://${host}/log/system_log`,
+    systemLogSince: (since) => `${httpProtocol}://${host}/log/system_log/since/${since}`,
+    agentLog: (uuid) => `${httpProtocol}://${host}/log/${uuid}`,
+    agentLogSince: (uuid, since) => `${httpProtocol}://${host}/log/${uuid}/since/${since}`,
+    inferenceRequest: `${httpProtocol}://${host}/inference/request`,
+    processingTasks: `${httpProtocol}://${host}/task/processing_tasks`,
+    successTasks: `${httpProtocol}://${host}/task/success_tasks`,
+    failedTasks: `${httpProtocol}://${host}/task/failed_tasks`,
 }
 
 export const websocketUrl = {
-    systemPerformance: `${websocketProtocol}://${hostname}:${port}/monitor/websocket/performance/system`,
-    agentPerformance: (uuid) => `${websocketProtocol}://${hostname}:${port}/monitor/websocket/performance/${uuid}`,
+    systemPerformance: `${websocketProtocol}://${host}/monitor/websocket/performance/system`,
+    agentPerformance: (uuid) => `${websocketProtocol}://${host}/monitor/websocket/performance/${uuid}`,
 }
 
-export const AGENT_LIST_REFRESH_INTERVAL = 60000;
-export const LOG_REFRESH_INTERVAL = 60000;
+export const REFRESH_INTERVAL = 60000;

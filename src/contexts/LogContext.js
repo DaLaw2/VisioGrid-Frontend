@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import {urls, LOG_REFRESH_INTERVAL} from '../AppConfig';
+import {urls, REFRESH_INTERVAL} from '../AppConfig';
 import {useErrorBoundary} from 'react-error-boundary';
 
 export const LogContext = createContext();
@@ -108,7 +108,7 @@ export const LogProvider = ({children}) => {
         const interval = setInterval(() => {
             fetchUpdatedAgentLogs();
             fetchUpdatedSystemLogs();
-        }, LOG_REFRESH_INTERVAL);
+        }, REFRESH_INTERVAL);
 
         return () => clearInterval(interval);
     }, []);

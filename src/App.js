@@ -11,6 +11,7 @@ import ErrorDialog from "./components/ErrorDialog";
 import InferenceForm from "./components/InferenceForm";
 import Sidebar from './components/Sidebar';
 import TestErrorHanding from "./test/TestErrorHanding";
+import TaskDashboard from "./components/TaskDashboard";
 
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -25,10 +26,11 @@ function App() {
                     <div className={`main-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
                         <Routes>
                             <Route path="/" element={<Dashboard/>}/>
-                            <Route path="/config" element={<Config/>}/>
                             <Route path="/agents" element={<AgentsList />} />
                             <Route path="/agent/:uuid" element={<AgentDashboard />} />
                             <Route path="/inference" element={<InferenceForm />} />
+                            <Route path="task" element={<TaskDashboard/>} />
+                            <Route path="/config" element={<Config/>}/>
                             <Route path="error" element={<TestErrorHanding/>}/>
                         </Routes>
                     </div>

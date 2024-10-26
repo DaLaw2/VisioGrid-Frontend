@@ -96,7 +96,7 @@ function AgentDashboard() {
                 <Pie data={vramData} options={pieChartOptions}/>
             </div>
         </div>
-        <h1>Management Log</h1>
+        <h1>Agent Log</h1>
         <LogComponent logType="agent" identifier={uuid}/>
     </div>);
 }

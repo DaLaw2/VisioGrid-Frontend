@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import {useErrorBoundary} from "react-error-boundary";
-import {urls, websocketUrl, AGENT_LIST_REFRESH_INTERVAL} from '../AppConfig';
+import {urls, websocketUrl, REFRESH_INTERVAL} from '../AppConfig';
 
 export const AgentContext = createContext(null);
 
@@ -64,7 +64,7 @@ export const AgentProvider = ({children}) => {
 
     useEffect(() => {
         fetchAgentList();
-        const intervalId = setInterval(fetchAgentList, AGENT_LIST_REFRESH_INTERVAL);
+        const intervalId = setInterval(fetchAgentList, REFRESH_INTERVAL);
         return () => clearInterval(intervalId);
     }, []);
 

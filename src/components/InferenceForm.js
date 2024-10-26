@@ -1,23 +1,22 @@
-// InferenceForm.jsx
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    Container,
+    Alert,
+    Button,
     Card,
     CardContent,
-    Typography,
-    FormControl,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    Button,
-    Collapse,
-    TextField,
     Checkbox,
+    Collapse,
+    Container,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
     Grid,
-    Alert,
+    Radio,
+    RadioGroup,
+    TextField,
+    Typography,
 } from '@mui/material';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
+import {ExpandLess, ExpandMore} from '@mui/icons-material';
 import {urls} from "../AppConfig"
 
 const defaultValues = {
@@ -103,7 +102,6 @@ const InferenceForm = () => {
                     <Typography variant="h4" component="div" align="center" gutterBottom>
                         Inference
                     </Typography>
-
                     {alertMessage && (
                         <Alert
                             severity={alertSeverity}
@@ -113,7 +111,6 @@ const InferenceForm = () => {
                             {alertMessage}
                         </Alert>
                     )}
-
                     <form onSubmit={handleSubmit}>
                         <Card sx={{ mb: 3 }}>
                             <CardContent>
@@ -171,7 +168,6 @@ const InferenceForm = () => {
                                 </FormControl>
                             </CardContent>
                         </Card>
-
                         <Button
                             variant="contained"
                             onClick={() => setOpen(!open)}
@@ -212,7 +208,6 @@ const InferenceForm = () => {
                                             inputProps={{ min: 1 }}
                                         />
                                     </Grid>
-
                                     <Grid item xs={12} sm={4}>
                                         <FormControlLabel
                                             control={
@@ -242,7 +237,6 @@ const InferenceForm = () => {
                                             inputProps={{ min: 1 }}
                                         />
                                     </Grid>
-
                                     <Grid item xs={12} sm={4}>
                                         <FormControlLabel
                                             control={
@@ -275,7 +269,6 @@ const InferenceForm = () => {
                                 </Grid>
                             </Card>
                         </Collapse>
-
                         <Card sx={{ mb: 3 }}>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom>
@@ -317,7 +310,6 @@ const InferenceForm = () => {
                                 </Grid>
                             </CardContent>
                         </Card>
-
                         <Grid container spacing={2} justifyContent="space-between">
                             <Grid item>
                                 <Button variant="outlined" onClick={() => window.history.back()}>

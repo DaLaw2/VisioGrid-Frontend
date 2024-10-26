@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaBars, FaCogs, FaHome, FaProjectDiagram, FaServer} from 'react-icons/fa';
+import {FaBars, FaCogs, FaHome, FaProjectDiagram, FaServer, FaTasks} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
 import '../styles/Sidebar.css';
 
@@ -28,6 +28,12 @@ function Sidebar({isOpen, toggleSidebar}) {
                 <NavLink to="/inference" className="menu-item">
                     <FaProjectDiagram className="menu-icon"/>
                     {isOpen && <span>Inference</span>}
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/task" className="menu-item">
+                    <FaTasks className="menu-icon"/>
+                    {isOpen && <span>Task</span>}
                 </NavLink>
             </li>
             <li>

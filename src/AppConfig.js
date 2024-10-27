@@ -1,9 +1,9 @@
 let httpProtocol = "http";
 let websocketProtocol = "ws";
-const hostname = "127.0.0.1"
-const port = 8080
-const host = `${hostname}:${port}`
-// const host = window.location.host;
+// const hostname = "127.0.0.1"
+// const port = 8080
+// const host = `${hostname}:${port}`
+const host = window.location.host;
 export const urls = {
     getConfig: `${httpProtocol}://${host}/config/get`,
     updateConfig: `${httpProtocol}://${host}/config/update`,
@@ -20,6 +20,7 @@ export const urls = {
     processingTasks: `${httpProtocol}://${host}/task/processing_tasks`,
     successTasks: `${httpProtocol}://${host}/task/success_tasks`,
     failedTasks: `${httpProtocol}://${host}/task/failed_tasks`,
+    downloadTask: (uuid) =>  `${httpProtocol}://${host}/task/download/${uuid}`,
 }
 
 export const websocketUrl = {

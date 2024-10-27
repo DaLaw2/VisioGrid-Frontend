@@ -23,8 +23,9 @@ import {
 } from '@mui/material';
 import { TaskContext } from '../contexts/TaskContext';
 import InfoIcon from '@mui/icons-material/Info';
+import {urls} from "../AppConfig";
 
-// 輔助函數：將駝峰式或 PascalCase 字符串轉換為帶空格的字符串
+// 辅助函数：将驼峰式或 PascalCase 字符串转换为带空格的字符串
 const formatStatus = (status) => {
     return status.replace(/([A-Z])/g, ' $1').trim();
 };
@@ -47,6 +48,10 @@ const TaskDashboard = () => {
     const handleClose = () => {
         setOpen(false);
         setSelectedTask(null);
+    };
+
+    const handleDownload = (uuid) => {
+        window.open(urls.downloadTask(uuid), '_blank');
     };
 
     const renderTable = useCallback((tasks) => (
@@ -74,6 +79,16 @@ const TaskDashboard = () => {
                                 <IconButton color="primary" onClick={() => handleOpen(task)}>
                                     <InfoIcon />
                                 </IconButton>
+                                {task.status === "Success" && (
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => handleDownload(task.uuid)}
+                                        sx={{ ml: 1 }}
+                                    >
+                                        Download
+                                    </Button>
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}
@@ -105,7 +120,6 @@ const TaskDashboard = () => {
                     </Box>
                 </>
             )}
-            {/* Dialog for displaying subtask errors */}
             <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
                 <DialogTitle>Subtask Errors</DialogTitle>
                 <DialogContent dividers>
